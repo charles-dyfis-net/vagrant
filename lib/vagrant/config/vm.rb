@@ -54,7 +54,8 @@ module Vagrant
           :ip => ip,
           :netmask => "255.255.255.0",
           :adapter => 1,
-          :name => nil
+          :name => nil,
+          :dhcp_range => nil
         }.merge(options || {})
 
         @network_options[options[:adapter]] = options
