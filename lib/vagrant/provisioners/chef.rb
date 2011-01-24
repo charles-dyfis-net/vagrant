@@ -39,7 +39,8 @@ module Vagrant
           :https_proxy => config.https_proxy,
           :https_proxy_user => config.https_proxy_user,
           :https_proxy_pass => config.https_proxy_pass,
-          :no_proxy => config.no_proxy
+          :no_proxy => config.no_proxy,
+          :num_attempts => config.num_attempts
         }.merge(template_vars))
 
         vm.ssh.upload!(StringIO.new(config_file), File.join(config.provisioning_path, filename))
@@ -90,6 +91,7 @@ module Vagrant
         attr_accessor :no_proxy
         attr_accessor :binary_path
         attr_accessor :binary_env
+        attr_accessor :num_attempts
 
         def initialize
           @provisioning_path = "/tmp/vagrant-chef"
@@ -104,6 +106,7 @@ module Vagrant
           @no_proxy = nil
           @binary_path = nil
           @binary_env = nil
+          @num_attempts = 1
         end
 
         # Returns the run list for the provisioning
