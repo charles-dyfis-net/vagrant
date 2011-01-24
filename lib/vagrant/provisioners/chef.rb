@@ -48,7 +48,8 @@ module Vagrant
           :https_proxy => config.https_proxy,
           :https_proxy_user => config.https_proxy_user,
           :https_proxy_pass => config.https_proxy_pass,
-          :no_proxy => config.no_proxy
+          :no_proxy => config.no_proxy,
+          :num_attempts => config.num_attempts
         }.merge(template_vars))
 
         env[:vm].ssh.upload!(StringIO.new(config_file),
@@ -101,6 +102,7 @@ module Vagrant
         attr_accessor :no_proxy
         attr_accessor :binary_path
         attr_accessor :binary_env
+        attr_accessor :num_attempts
         attr_writer :run_list
 
         def initialize
@@ -117,6 +119,7 @@ module Vagrant
           @binary_path = nil
           @binary_env = nil
           @run_list = nil
+          @num_attempts = 1
         end
 
         # This returns the json that is merged with the defaults and the
