@@ -177,7 +177,7 @@ class ChefClientProvisionerTest < Test::Unit::TestCase
     end
 
     should "run chef client" do
-      @ssh.expects(:sudo!).with("chef-client -c #{@config.provisioning_path}/client.rb -j #{@config.provisioning_path}/dna.json").once
+      @ssh.expects(:sudo!).with("cd /tmp/vagrant-chef; (i=0; while (( i<1 )) ; do (( i++ ));    if chef-client -c #{@config.provisioning_path}/client.rb -j #{@config.provisioning_path}/dna.json;      then exit 0;    fi;  done; exit 1)").once
       @action.run_chef_client
     end
 

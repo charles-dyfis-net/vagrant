@@ -101,7 +101,7 @@ class ChefSoloProvisionerTest < Test::Unit::TestCase
     end
 
     should "run chef solo" do
-      @ssh.expects(:sudo!).with("chef-solo -c #{@config.provisioning_path}/solo.rb -j #{@config.provisioning_path}/dna.json").once
+      @ssh.expects(:sudo!).with("cd /tmp/vagrant-chef; (i=0; while (( i<1 )) ; do (( i++ ));    if chef-solo -c #{@config.provisioning_path}/solo.rb -j #{@config.provisioning_path}/dna.json;      then exit 0;    fi;  done; exit 1)").once
       @action.run_chef_solo
     end
 
